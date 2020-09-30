@@ -10,6 +10,8 @@
 | 5 - Data   | RxD        |
 | 6 - GND    |            |
 
+A 10k resistor is connected between 5V and RxD. The RxD input is inverted wit the program ft232r_prog.
+
 ## Data Sent
 
 The software sends out to the following MQTT topics:
