@@ -1,14 +1,14 @@
 # Aidon 6534
 
   
-| Aidon RJ12 | USB serial |
-| ----       | ----       |
-| 1 - 5V     |            |
-| 2 - RTS    | 5V         |
-| 3 - GND    | GND        |
-| 4 -        |            |
-| 5 - Data   | RxD        |
-| 6 - GND    |            |
+| Aidon -> RJ12 -> | -> FTDI -> USB |
+| ----             | ----           |
+| 1 - 5V           |                |
+| 2 - RTS          | 5V             |
+| 3 - GND          | GND            |
+| 4 -              |                |
+| 5 - Data         | RxD            |
+| 6 - GND          |                |
 
 A 10k resistor is connected between 5V and RxD. The RxD input is inverted with the program `ft232r_prog`.
 
