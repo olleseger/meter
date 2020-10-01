@@ -10,7 +10,7 @@
 | 5 - Data         | RxD            |
 | 6 - GND          |                |
 
-A 10k resistor is connected between 5V and RxD. The RxD input is inverted with the program `ft232r_prog`.
+A 10k resistor is connected between 5V and RxD on the FTDI. The RxD input on the FTDI is inverted with the program `ft232r_prog`.
 
 ## Data Sent
 
