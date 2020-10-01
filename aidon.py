@@ -1,5 +1,6 @@
 import time
 import serial
+import math
 import paho.mqtt.client as mqtt
 
 debug = False
@@ -19,6 +20,44 @@ N_timestamp = 24 # length of timestamp
 N_line1 = 21
 N_line2 = 19
 N_trailer = 3
+
+units = {
+    0x1b : "W",
+    0x1d : "VAr",
+    0x1e : "kWh",
+    0x20 : "kVArh",
+    0x21 : "A",
+    0x23 : "V",
+}
+
+aidon_strings = {
+    0x0107 : "Momentary active power+       ",
+    0x0207 : "Momentary active power-       ",
+    0x0307 : "Momentary reactive power+     ",
+    0x0407 : "Momentary reactive power-     ",
+    0x1f07 : "Momentary current (L1)        ",
+    0x3307 : "Momentary current (L2)        ",
+    0x4707 : "Momentary current (L3)        ",
+    0x2007 : "Momentary voltage (L1)        ",
+    0x3407 : "Momentary voltage (L2)        ",
+    0x4807 : "Momentary voltage (L3)        ",
+    0x1507 : "Momentary active power+ (L1)  ",
+    0x1607 : "Momentary active power- (L1)  ",
+    0x1707 : "Momentary reactive power+ (L1)",
+    0x1807 : "Momentary reactive power- (L1)",
+    0x2907 : "Momentary active power+ (L2)  ",
+    0x2a07 : "Momentary active power- (L2)  ",
+    0x2b07 : "Momentary reactive power+ (L2)",
+    0x2c07 : "Momentary reactive power- (L2)",
+    0x3d07 : "Momentary active power+ (L3)  ",
+    0x3e07 : "Momentary active power- (L3)  ",
+    0x3f07 : "Momentary reactive power+ (L3)",
+    0x4007 : "Momentary reactive power- (L3)",
+    0x0108 : "Cumulative active energy+     ",
+    0x0208 : "Cumulative active energy-     ",
+    0x0308 : "Cumulative reactive energy+   ",
+    0x0408 : "Cumulative reactive energy-   ",
+}
 
 ser = serial.Serial("/dev/ttyUSB0", baudrate = 115200, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=2)
 
@@ -79,8 +118,8 @@ while 1:
 
         p = int.from_bytes(l[13:15], byteorder="big")
         measurements.append(p)
-        
-        print("Momentary power {0:d}=      {1:4d} W".format(quad+1, p), end="\t\t")
+
+        print("Momentary power {0:d}=      {1:4d} {2:s}".format(quad+1, p, units[l[-1]]), end="\t\t")
 
         if debug:
             #print("\n\nOBIS={0:d}-{1:d}:{2:d}.{3:d}.{4:d}.{5:d}".format(l[4], l[5], l[6], l[7], l[8], l[9]), end=" ")
@@ -98,7 +137,7 @@ while 1:
         v = int.from_bytes(l[11:13], byteorder="big")/10.0
         measurements.append(v)
     
-        print("Momentary current (L{0:d})=    {1:3.1f} A".format(phase+1, v), end="\t")
+        print("Momentary current (L{0:d})=    {1:3.1f} {2:s}".format(phase+1, v, units[l[-1]]), end="\t")
 
         if debug:
             #print("\n\nOBIS={0:d}-{1:d}:{2:d}.{3:d}.{4:d}.{5:d}".format(l[4], l[5], l[6], l[7], l[8], l[9]), end=" ")
@@ -116,7 +155,7 @@ while 1:
         v = int.from_bytes(l[11:13], byteorder="big")/10.0
         measurements.append(v)
     
-        print("Momentary voltage (L{0:d})=    {1:3.1f} V".format(phase+1, v), end="\t")
+        print("Momentary voltage (L{0:d})=    {1:3.1f} {2:s}".format(phase+1, v, units[l[-1]]), end="\t")
 
         if debug:
             #print("\n\nOBIS={0:d}-{1:d}:{2:d}.{3:d}.{4:d}.{5:d}".format(l[4], l[5], l[6], l[7], l[8], l[9]), end=" ")
@@ -135,7 +174,7 @@ while 1:
             p = int.from_bytes(l[13:15], byteorder="big")
             measurements.append(p)
             
-            print("Momentary power {0:d} (L{1:d})=   {2:4d} W".format(quad+1, phase+1, p), end="\t")
+            print("Momentary power {0:d} (L{1:d})=   {2:4d} {3:s}".format(quad+1, phase+1, p, units[l[-1]]), end="\t")
 
             if debug:
                 #print("\n\nOBIS={0:d}-{1:d}:{2:d}.{3:d}.{4:d}.{5:d}".format(l[4], l[5], l[6], l[7], l[8], l[9]), end=" ")
@@ -153,7 +192,7 @@ while 1:
         e = int.from_bytes(l[12:15], byteorder="big")/1000.0
         measurements.append(e)
         
-        print("Cumulative energy {0:d}=       {1:5.1f} kWh".format(quad+1, e), end="\t")
+        print("Cumulative energy {0:d}=       {1:5.1f} {2:s}".format(quad+1, e, units[l[-1]]), end="\t")
 
         if debug:
             #print("\n\nOBIS={0:d}-{1:d}:{2:d}.{3:d}.{4:d}.{5:d}".format(l[4], l[5], l[6], l[7], l[8], l[9]), end=" ")
@@ -172,24 +211,36 @@ while 1:
             print("{0:02x}".format(l[i]), end=" ")
 
     
-    print("")
-    etime2 = (time.time() - stime2)
-    
     ############################
     # Publicera till MQTT
     ############################
+    ap = measurements[0] - measurements[1]
+    rp = measurements[2] - measurements[3]
+    fi = 180*math.atan2(rp,ap)/math.pi
+
+    print("Phase angle = {0:3.1f}".format(fi))
+
     if not debug:
-        client.publish("meter/activepower", measurements[0])
+        client.publish("meter/activepower", ap)
+        client.publish("meter/reactivepower", rp)
+        client.publish("meter/fi", fi)
+        
         client.publish("meter/current1", measurements[4])
         client.publish("meter/current2", measurements[5])
         client.publish("meter/current3", measurements[6])
+
         client.publish("meter/voltage1", measurements[7])
         client.publish("meter/voltage2", measurements[8])
         client.publish("meter/voltage3", measurements[9])
+
         client.publish("meter/activepower1", measurements[10])
         client.publish("meter/activepower2", measurements[14])
         client.publish("meter/activepower3", measurements[18])
+        
         client.publish("meter/activeenergy", measurements[22])
+
+    etime2 = (time.time() - stime2)
+    
 
 
 
