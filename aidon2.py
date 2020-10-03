@@ -66,13 +66,17 @@ while True:
             sec = r[19]
             print(fmt.format(year, month, day, hour, min, sec), end="\t")
         else:
-            nr = telegram.values[r[10]]
+            key = r[10]
+            nr = telegram.values[key][0]
+            pm = telegram.values[key][1]
+            
             N_line = 11 + nr + 6
+
+            key = r[N_line-1]
+            dv = telegram.units[key][1]
+            un = telegram.units[key][0]
         
-            dv = telegram.units[r[N_line-1]][1]
-            un = telegram.units[r[N_line-1]][0]
-        
-            p = int.from_bytes(r[11:11+nr], byteorder="big", signed = False)
+            p = int.from_bytes(r[11:11+nr], byteorder="big", signed = pm)
             if dv != 1:
                 p = p/dv
                 

@@ -50,17 +50,14 @@ units = {
     0x23 : ["V", 10.0]
 }
 
-# key : nr_bytes
+# key : [nr_bytes signed]
 values = {
-    0x06 : 4,
-    0x10 : 2,
-    0x12 : 2
+    0x06 : [4, False],
+    0x10 : [2, True],
+    0x12 : [2, False]
 }
 
-################################################
-# format strings
-# obis_key : string
-################################################
+# obis_key : format string
 aidon_strings = {
     0x00000100 : "Timestamp: {0:4d}-{1:02d}-{2:02d} {3:02d}:{4:02d}:{5:02d}\t\t",
     0x01000107 : "Momentary active power+       = {0:4d} {1:s}\t",
