@@ -31,9 +31,16 @@ while True:
     if r[0] == 0x7e and r[-1] == 0x7e:
         print("Flags OK!")
         
-    crc = libscrc.ibm(r[18:-3])
+    packagelen = int.from_bytes(r[1:3], byteorder="big") & 0xfff
+    print("Package length = {0:4d}".format(packagelen))
+    frameheader = r[3:12]
+    
+    crc = libscrc.ibm(r[12:-3])
     crc_sent = int.from_bytes(r[0:2], byteorder="big")
     print("crc sent: {0:04x}  crc received: {1:04x}".format(crc_sent, crc), end="\t\t")
+
+    dataheader = r[12:18]
+    N_lines = r[telegram.N_header-1]
 
     ############################
     # Header
@@ -44,8 +51,7 @@ while True:
             print("{0:02x}".format(r[i]), end=" ")
     print("")
 
-    N_lines = r[telegram.N_header-1]
-
+    
     r = r[telegram.N_header:]
 
     ############################
