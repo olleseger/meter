@@ -1,7 +1,7 @@
 import serial
 import time
 import math
-import crc16
+import libscrc
 import telegram
 
 debug = True
@@ -25,8 +25,15 @@ while True:
         while True:
             r = ser.read(telegram.N)
             M = len(r)
-            if M==N and r[0] == 0x7e and r[-1] == 0x7e:
+            if M==N:
                 break
+
+    if r[0] == 0x7e and r[-1] == 0x7e:
+        print("Flags OK!")
+        
+    crc = libscrc.ibm(r[18:-3])
+    crc_sent = int.from_bytes(r[0:2], byteorder="big")
+    print("crc sent: {0:04x}  crc received: {1:04x}".format(crc_sent, crc), end="\t\t")
 
     ############################
     # Header
@@ -38,8 +45,6 @@ while True:
     print("")
 
     N_lines = r[telegram.N_header-1]
-
-    crc = crc16.crc16xmodem(r[18:-3])
 
     r = r[telegram.N_header:]
 
@@ -95,14 +100,8 @@ while True:
     # Trailer
     ############################
     if debug:
-        crc_sent = int.from_bytes(r[0:2], byteorder="big")
-        print("crc sent: {0:04x}  crc received: {1:04x}".format(crc_sent, crc), end="\t\t")
-        for i in range(telegram.N_trailer):
-            print("{0:02x}".format(r[i]), end=" ")
         time.sleep(10.0)
             
-    print("")
-
     
     ############################
     # Publicera till MQTT
@@ -111,7 +110,7 @@ while True:
     rp = measurements[2] - measurements[3]
     fi = 180*math.atan2(rp,ap)/math.pi
 
-    print("Phase angle = {0:3.1f}".format(fi))
+    print("")
 
     if not debug:
         client.publish("meter/activepower", ap)
