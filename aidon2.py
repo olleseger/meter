@@ -3,8 +3,8 @@ import time
 import math
 import libscrc
 import telegram
-
-debug = True
+import paho.mqtt.client as mqtt
+debug = False
 
 if not debug:
     hostname = "192.168.1.29"
@@ -25,7 +25,7 @@ while True:
         while True:
             r = ser.read(telegram.N)
             M = len(r)
-            if M==N:
+            if M == telegram.N:
                 break
 
     if r[0] == 0x7e and r[-1] == 0x7e:
