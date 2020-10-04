@@ -49,11 +49,12 @@ while True:
         continue
 
     crc1 = libscrc.x25(r[1:-3])
-    crc2 = int.from_bytes(r[-2:])
+    crc2 = int.from_bytes(r[-3:-1], byteorder="little")
+    
     if crc1 == crc2:
-        print("CRC OK!")
+        print("CRC OK! {0:4x}".format(crc1))
     else:
-        print("CRC not OK! {0:4x} {0:4x}".format(crc1, crc2))
+        print("CRC not OK! {0:4x} {1:4x}".format(crc1, crc2))
         continue
 
     ############################
