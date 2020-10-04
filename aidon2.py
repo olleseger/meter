@@ -4,7 +4,12 @@ import math
 import libscrc
 import telegram
 import paho.mqtt.client as mqtt
-debug = False
+import sys
+
+if str(sys.argv[1]) == "-d":
+    debug = True
+else:
+    debug = False
 
 if not debug:
     hostname = "192.168.1.29"
@@ -124,7 +129,7 @@ while True:
     # Trailer
     ############################
     if debug:
-        time.sleep(10.0)
+        break
             
     
     ############################
