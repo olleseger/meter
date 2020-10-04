@@ -6,9 +6,10 @@ import telegram
 import paho.mqtt.client as mqtt
 import sys
 
-if str(sys.argv[1]) == "-d":
-    print("debug")
-    debug = True
+if len(sys.argv)>1:
+    if str(sys.argv[1]) == "-d":
+        print("debug")
+        debug = True
 else:
     debug = False
 
@@ -26,7 +27,7 @@ while True:
     measurements = []
 
     if debug:
-        r = telegram.telegram
+        r = bytes(telegram.telegram)
     else:
         while True:
             r = ser.read(telegram.N)
