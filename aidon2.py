@@ -48,11 +48,12 @@ while True:
         print("Length not OK! {0:4d} {0:4d}".format(packagelen+2, len(r)))
         continue
 
-    crc = libscrc.x25(r[1:-1])
-    if crc == 0xf47:
+    crc1 = libscrc.x25(r[1:-3])
+    crc2 = int.from_bytes(r[-2:])
+    if crc1 == crc2:
         print("CRC OK!")
     else:
-        print("CRC not OK!")
+        print("CRC not OK! {0:4x} {0:4x}".format(crc1, crc2))
         continue
 
     ############################
