@@ -7,6 +7,7 @@ import paho.mqtt.client as mqtt
 import sys
 
 if str(sys.argv[1]) == "-d":
+    print("debug")
     debug = True
 else:
     debug = False
