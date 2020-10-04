@@ -31,18 +31,21 @@ while True:
     if r[0] == 0x7e and r[-1] == 0x7e:
         print("Flags OK!")
     else:
+        print("Flags not OK! {0:4d} {1:4d}".format(r[0], r[-1]))
         continue
 
     packagelen = int.from_bytes(r[1:3], byteorder="big") & 0xfff
     if (packagelen+2) == len(r):
         print("Length OK! {0:4d}".format(packagelen+2))
     else:
+        print("Length not OK! {0:4d} {0:4d}".format(packagelen+2, len(r)))
         continue
 
     crc = libscrc.x25(r[1:-1])
     if crc == 0xf47:
         print("CRC OK!")
     else:
+        print("CRC not OK!")
         continue
 
     ############################
