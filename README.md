@@ -47,8 +47,7 @@ meter/activeenergy
 ```
 
 ## Home asssistant configuration
-![bild](bilder/Homeassistant.JPG)
-
+Put this in `.yaml` file:
 ```
 sensor:
   - platform: mqtt
@@ -58,6 +57,11 @@ sensor:
 #
 # and so on
 ```
+
+
+![bild](bilder/Homeassistant.JPG)
+
+
 
 
 
