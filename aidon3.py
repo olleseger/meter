@@ -5,11 +5,11 @@ if __name__ == "__main__":
     if len(sys.argv)>1:
         if str(sys.argv[1]) == "-d":
             print("debug")
-            debug = True
+            dbg = True
         else:
-            debug = False
+            dbg = False
 
-    meter = aidon(debug=True)
+    meter = aidon(debug=dbg)
 
     while True:
         meter.read_frame()
@@ -18,7 +18,7 @@ if __name__ == "__main__":
 
         meter.parse_frame()
 
-        if debug:
+        if dbg:
             break
         
         meter.publish_frame()
