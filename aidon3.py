@@ -6,8 +6,8 @@ if __name__ == "__main__":
         if str(sys.argv[1]) == "-d":
             print("debug")
             dbg = True
-        else:
-            dbg = False
+    else:
+        dbg = False
 
     meter = aidon(debug=dbg)
 

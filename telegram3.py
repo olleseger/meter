@@ -137,9 +137,9 @@ class aidon(object):
     ############################
     def check_frame(self):
         if self.r[0] == flag and self.r[-1] == flag:
-            print("Flags OK!")
+            print("Flags OK! {0:02x}".format(self.r[0]))
         else:
-            print("Flags not OK! {0:4d} {1:4d}".format(r[0], r[-1]))
+            print("Flags not OK! {0:02x} {1:02x}".format(self.r[0], self.r[-1]))
             return False
 
         # strip flags
@@ -157,9 +157,9 @@ class aidon(object):
         crc2 = int.from_bytes(self.r[-2:], byteorder="little")
     
         if crc1 == crc2:
-            print("CRC OK! {0:4x}".format(crc1))
+            print("CRC OK! {0:04x}".format(crc1))
         else:
-            print("CRC not OK! {0:4x} {1:4x}".format(crc1, crc2))
+            print("CRC not OK! {0:04x} {1:04x}".format(crc1, crc2))
             return False
 
         if self.debug:
@@ -233,6 +233,8 @@ class aidon(object):
             print("")
         
             self.r = self.r[N_line:]
+
+        print("")
             
     ############################
     # Publicera till MQTT
