@@ -91,7 +91,7 @@ meter/activeenergy
 ```
 
 ## Home asssistant configuration
-Put this in `.yaml` file:
+Put this in a `.yaml` file:
 ```
 sensor:
   - platform: mqtt
