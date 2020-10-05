@@ -1,6 +1,11 @@
 # Aidon 6534
 
-Software for reading of the Aidon 6534 meter. 
+
+## Software for reading of the Aidon 6534 meter. 
+Run the program by:
+```
+python3 aidon3.py
+```
 
 ## Things needed
 - A Raspberry Pi 4
