@@ -4,7 +4,7 @@ Software for reading of the Aidon 6534 meter.
 
 ## Things needed
 - A Raspberry Pi 4
-- A USB-serial cable. (https://www.kjell.com/se/produkter/el-verktyg/arduino/moduler/luxorparts-usb-till-seriell-adapter-for-arduino-p88064)
+- A [USB-serial cable](https://www.kjell.com/se/produkter/el-verktyg/arduino/moduler/luxorparts-usb-till-seriell-adapter-for-arduino-p88064)
 - A 10 k resistor
 - The program `ft232r_prog` for reprogramming the FTDI chip on the USB-serial cable.
 
@@ -40,4 +40,18 @@ meter/current2
 meter/current3
 meter/activeenergy
 ```
+
+## Home asssistant configuration
+
+```
+sensor:
+  - platform: mqtt
+    state_topic: "meter/activepower"
+    name: "Active Power"
+    unit_of_measurement: "W"
+#
+# and so on
+```
+
+
 
