@@ -35,12 +35,15 @@ while True:
             if M == telegram.N:
                 break
 
-    if r[0] == 0x7e and r[-1] == 0x7e:
+    if r[0] == telegram.flag and r[-1] == telegram.flag:
         print("Flags OK!")
     else:
         print("Flags not OK! {0:4d} {1:4d}".format(r[0], r[-1]))
         continue
 
+    ############################
+    # Header
+    ############################
     packagelen = int.from_bytes(r[1:3], byteorder="big") & 0xfff
     if (packagelen+2) == len(r):
         print("Length OK! {0:4d}".format(packagelen+2))
@@ -57,9 +60,6 @@ while True:
         print("CRC not OK! {0:4x} {1:4x}".format(crc1, crc2))
         continue
 
-    ############################
-    # Header
-    ############################
     if debug:
         print("\nHeader", end="\t\t\t\t\t\t")
         for i in range(telegram.N_header):
@@ -143,11 +143,26 @@ while True:
     rp = measurements[2] - measurements[3]
     fi = 180*math.atan2(rp,ap)/math.pi
 
+    ap1 = measurements[10] - measurements[11]
+    rp1 = measurements[12] - measurements[13]
+    fi1 = 180*math.atan2(rp1, ap1)/math.pi
+
+    ap2 = measurements[14] - measurements[15]
+    rp2 = measurements[16] - measurements[17]
+    fi2 = 180*math.atan2(rp2, ap2)/math.pi
+
+    ap3 = measurements[18] - measurements[19]
+    rp3 = measurements[20] - measurements[21]
+    fi3 = 180*math.atan2(rp3, ap3)/math.pi
+
+    ae = measurements[22] - measurements[23]
+    re = measurements[24] - measurements[25]
+    fie = 180*math.atan2(re, ae)/math.pi
+
     print("")
 
     if not debug:
         client.publish("meter/activepower", ap)
-        client.publish("meter/reactivepower", rp)
         client.publish("meter/fi", fi)
         
         client.publish("meter/current1", measurements[4])
@@ -158,11 +173,15 @@ while True:
         client.publish("meter/voltage2", measurements[8])
         client.publish("meter/voltage3", measurements[9])
 
-        client.publish("meter/activepower1", measurements[10])
-        client.publish("meter/activepower2", measurements[14])
-        client.publish("meter/activepower3", measurements[18])
+        client.publish("meter/activepower1", ap1)
+        client.publish("meter/fi1", fi1)
+        client.publish("meter/activepower2", ap2)
+        client.publish("meter/fi2", fi2)
+        client.publish("meter/activepower3", ap3)
+        client.publish("meter/fi3", fi3)
         
-        client.publish("meter/activeenergy", measurements[22])
+        client.publish("meter/activeenergy", ae)
+        client.publish("meter/fie", fie)
 
 
 
