@@ -47,6 +47,7 @@ meter/activeenergy
 ```
 
 ## Home asssistant configuration
+![bild](bilder/Homeassistant.jpg)
 
 ```
 sensor:
