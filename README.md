@@ -1,11 +1,6 @@
 # Aidon 6534
 
-
 ## Software for reading of the Aidon 6534 meter. 
-Run the program by:
-```
-python3 aidon3.py
-```
 
 ## Things needed
 - A Raspberry Pi 4
@@ -29,7 +24,12 @@ Then connect an RJ12 cable to the USB-serial cable:
 A 10k resistor is connected between 5V and RxD on the FTDI. The RxD input on the USB-serial cable is inverted with the program `ft232r_prog`.
 Aidon uses `115200,8N1` serial communication. The `Data` output is `open collector` and inverted.
 
-## Debug printout
+## Running the program
+Run the program by:
+```
+python3 aidon3.py
+```
+
 If you run the program with the debug flag:
 ```
 python3 aidon3.py -d
@@ -40,11 +40,12 @@ debug
 Flags OK! first=last= 0x7e
 Length OK! from header=received= 579
 CRC OK! calculated=sent= 0x40be
-
-Header                                          a2 43 41 08 83 13 85 eb e6 e7 00 0f 40 00 00 00 00 01 1b 
 Package length =  579
-Nr of regs =   27
-Timestamp: 2019-12-16 08:59:40
+Nr of registers =   27
+
+Flag:                                           7e 
+Header:                                         a2 43 41 08 83 13 85 eb e6 e7 00 0f 40 00 00 00 00 01 1b 
+Timestamp: 2019-12-16 08:59:40                  02 02 09 06 00 00 01 00 00 ff 09 0c 07 e3 0c 10 01 07 3b 28 ff 80 00 ff 
 Momentary active power+       = 1122 W          02 03 09 06 01 00 01 07 00 ff 06 00 00 04 62 02 02 0f 00 16 1b 
 Momentary active power-       =    0 W          02 03 09 06 01 00 02 07 00 ff 06 00 00 00 00 02 02 0f 00 16 1b 
 Momentary reactive power+     = 1507 VAr        02 03 09 06 01 00 03 07 00 ff 06 00 00 05 e3 02 02 0f 00 16 1d 
@@ -71,7 +72,10 @@ Cumulative active energy+     = 10049.9 kWh     02 03 09 06 01 00 01 08 00 ff 06
 Cumulative active energy-     =   0.0 kWh       02 03 09 06 01 00 02 08 00 ff 06 00 00 00 08 02 02 0f 00 16 1e 
 Cumulative reactive energy+   = 6614.3 kVArh    02 03 09 06 01 00 03 08 00 ff 06 00 64 ed 4b 02 02 0f 00 16 20 
 Cumulative reactive energy-   =   0.0 kVArh     02 03 09 06 01 00 04 08 00 ff 06 00 00 00 05 02 02 0f 00 16 20 
+CRC:                                            40be
+Flag:                                           7e
 ```
+As can clearly be seen this is not ASCII!
 
 ## Data Sent
 

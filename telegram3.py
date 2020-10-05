@@ -154,26 +154,28 @@ class aidon(object):
             return False
 
         crc1 = libscrc.x25(self.r[0:-2])
-        crc2 = int.from_bytes(self.r[-2:], byteorder="little")
+        self.crc2 = int.from_bytes(self.r[-2:], byteorder="little")
     
-        if crc1 == crc2:
+        if crc1 == self.crc2:
             print("CRC OK! calculated=sent= 0x{0:04x}".format(crc1))
         else:
-            print("CRC not OK! calculated= 0x{0:04x} sent= 0x{1:04x}".format(crc1, crc2))
+            print("CRC not OK! calculated= 0x{0:04x} sent= 0x{1:04x}".format(crc1, self.crc2))
             return False
-
-        if self.debug:
-            print("\nHeader", end="\t\t\t\t\t\t")
-            for i in range(N_header):
-                print("{0:02x}".format(self.r[i]), end=" ")
-            print("")
 
         frameheader = self.r[3:12]
         dataheader = self.r[12:18]
         self.N_lines = self.r[N_header-1]
 
         print("Package length = {0:4d}".format(packagelen))
-        print("Nr of regs = {0:4d}".format(self.N_lines))
+        print("Nr of registers = {0:4d}".format(self.N_lines))
+
+        if self.debug:
+            print("\nFlag:", end="\t\t\t\t\t\t")
+            print("{0:02x}".format(flag), end=" ")
+            print("\nHeader:", end="\t\t\t\t\t\t")
+            for i in range(N_header):
+                print("{0:02x}".format(self.r[i]), end=" ")
+            print("")
 
         if packagelen != 579:
             with open('package.txt', 'w') as file:
@@ -226,16 +228,23 @@ class aidon(object):
                 self.measurements.append(p)
                 print(fmt.format(p, un), end="\t")
 
-                if self.debug:
-                    #print("\n\nOBIS={0:d}-{1:d}:{2:d}.{3:d}.{4:d}.{5:d}".format(r[4], r[5], r[6], r[7], r[8], r[9]), end=" ")
-                    for i in range(N_line):
-                        print("{0:02x}".format(self.r[i]), end=" ")
+            if self.debug:
+                #print("\n\nOBIS={0:d}-{1:d}:{2:d}.{3:d}.{4:d}.{5:d}".format(r[4], r[5], r[6], r[7], r[8], r[9]), end=" ")
+                for i in range(N_line):
+                    print("{0:02x}".format(self.r[i]), end=" ")
             print("")
         
             self.r = self.r[N_line:]
 
+        if self.debug:
+            print("CRC:", end="\t\t\t\t\t\t")
+            print("{0:04x}".format(self.crc2))
+            print("Flag:", end="\t\t\t\t\t\t")
+            print("{0:02x}".format(flag))
+
         print("")
-            
+
+        
     ############################
     # Publicera till MQTT
     ############################
