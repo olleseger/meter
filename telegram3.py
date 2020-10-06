@@ -194,7 +194,7 @@ class aidon(object):
     # Read 3x4 momentary powers
     # Read 4 quadrants of energy
     ############################
-    def parse_frame(self):
+    def decode_frame(self):
         self.measurements = []
         for lines in range(self.N_lines):
             obis = int.from_bytes(self.r[4:8], byteorder="big")
