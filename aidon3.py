@@ -16,7 +16,7 @@ if __name__ == "__main__":
         if not meter.check_frame():
             continue
 
-        meter.parse_frame()
+        meter.decode_frame()
 
         if dbg:
             break
