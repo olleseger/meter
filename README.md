@@ -35,12 +35,12 @@ Aidon uses `115200,8N1` serial communication. The `Data` output is `open collect
 ## Running the program
 Run the program by:
 ```bash
-python3 aidon3.py
+python3 aidon.py
 ```
 
 If you run the program with the debug flag:
 ```bash
-python3 aidon3.py -d
+python3 aidon.py -d
 ```
 you get this printout. It is the example in [Aidon](dokument/Aidon.pdf):
 ```bash

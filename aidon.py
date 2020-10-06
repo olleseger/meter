@@ -1,4 +1,4 @@
-from telegram3 import aidon
+from telegram import aidon
 import sys
 
 if __name__ == "__main__":
