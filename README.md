@@ -9,6 +9,7 @@
 * [Home Assistant](#home-assistant)
 
 ## Introduction 
+![bild](bilder/aidon.jpg)
 
 ## Things needed
 - A Raspberry Pi 4
@@ -31,6 +32,8 @@ Then connect an RJ12 cable to the USB-serial cable:
 
 A 10k resistor is connected between 5V and RxD on the FTDI. The RxD input on the USB-serial cable is inverted with the program `ft232r_prog`.
 Aidon uses `115200,8N1` serial communication. The `Data` output is `open collector` and inverted.
+
+![bild](bilder/kjell.jpg)
 
 ## Running the program
 Run the program by:
