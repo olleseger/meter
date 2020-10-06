@@ -1,6 +1,14 @@
 # Aidon 6534
 
-## Software for reading of the Aidon 6534 meter. 
+## Table of Contents
+
+* [Introduction](#introduction)
+* [Things needed](#things-needed)
+* [Connecting the RaspberryPi to the  Aidon 6534](#connecting-the-raspberrypi-to-the-aidon-6534)
+* [Running the program](#running-the-program)
+* [Home Assistant](#home-assistant)
+
+## Introduction 
 
 ## Things needed
 - A Raspberry Pi 4
@@ -26,12 +34,12 @@ Aidon uses `115200,8N1` serial communication. The `Data` output is `open collect
 
 ## Running the program
 Run the program by:
-```python
+```bash
 python3 aidon3.py
 ```
 
 If you run the program with the debug flag:
-```python
+```bash
 python3 aidon3.py -d
 ```
 you get this printout. It is the example in [Aidon](dokument/Aidon.pdf):
@@ -77,7 +85,7 @@ Flag:                                           7e
 ```
 As can clearly be seen this is not ASCII!
 
-## Data Sent
+## Home Assistant
 
 The software publishes the following MQTT topics:
 
@@ -95,9 +103,8 @@ meter/current3
 meter/activeenergy
 ```
 
-## Home asssistant configuration
 Put this in a `.yaml` file:
-```
+```yaml
 sensor:
   - platform: mqtt
     state_topic: "meter/activepower"

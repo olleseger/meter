@@ -166,10 +166,10 @@ class aidon(object):
         dataheader = self.r[12:18]
         self.N_lines = self.r[N_header-1]
 
-        print("Package length = {0:4d}".format(packagelen))
-        print("Nr of registers = {0:4d}".format(self.N_lines))
-
         if self.debug:
+            print("Package length = {0:4d}".format(packagelen))
+            print("Nr of registers = {0:4d}".format(self.N_lines))
+
             print("\nFlag:", end="\t\t\t\t\t\t")
             print("{0:02x}".format(flag), end=" ")
             print("\nHeader:", end="\t\t\t\t\t\t")
