@@ -4,7 +4,7 @@
 
 * [Introduction](#introduction)
 * [Things needed](#things-needed)
-* [Connecting the RaspberryPi to the Aidon 6534](#connecting-the-raspberrypi)
+* [Connecting the Raspberry Pi to the Aidon 6534](#connecting-the-raspberry-pi)
 * [Running the program](#running-the-program)
 * [Home Assistant](#home-assistant)
 
