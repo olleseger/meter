@@ -113,8 +113,28 @@ sensor:
 #
 # and so on
 ```
-
-
+and this in another `.yaml`-file:
+```yaml
+title: Meter
+icon: mdi:flash-auto
+path: meter
+cards:
+  - type: vertical-stack
+    cards:
+      - type: gauge
+        name: Effekt
+        unit: 'W'
+        entity: sensor.active_power
+        min: 0
+        max: 11520
+        severity:
+          green: 0
+          yellow: 2300
+          red: 4600
+# 
+# and so on
+```
+and you will get this:
 ![bild](bilder/Homeassistant.JPG)
 
 
