@@ -4,7 +4,7 @@
 
 * [Introduction](#introduction)
 * [Things needed](#things-needed)
-* [Connecting the RaspberryPi to the  Aidon 6534](#connecting-the-raspberrypi)
+* [Connecting the RaspberryPi to the Aidon 6534](#connecting-the-raspberrypi)
 * [Running the program](#running-the-program)
 * [Home Assistant](#home-assistant)
 
@@ -16,7 +16,7 @@
 - A 10 k resistor
 - The program `ft232r_prog` for reprogramming the FTDI chip on the USB-serial cable.
 
-## Connecting the RaspberryPi to the  Aidon 6534
+## Connecting the RaspberryPi to the Aidon 6534
 Connect the Raspberry Pi to a USB-serial cable. 
 Then connect an RJ12 cable to the USB-serial cable:
 
