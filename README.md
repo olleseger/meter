@@ -121,6 +121,14 @@ Flag:                                           7e
 ```
 As can clearly be seen this is binary communication not ASCII! The frame starts and ends with same flag: `0x7e`.
 
+## Breakdown
+| Data        |  Explanation  |
+| ----        | ----           |
+| 7e          |  Start flag         |
+| a           |  4 bits,  a = Frame Format Type 3 (0b1010)
+| 243         | 12 bits, frame size 0x243 = 579 bytes excluding start/stop flags          |
+
+
 ## Home Assistant
 
 The software publishes the following MQTT topics:
