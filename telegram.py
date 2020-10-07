@@ -2,7 +2,7 @@ import serial
 import paho.mqtt.client as mqtt
 import libscrc
 import math
-
+import time
 
 ##############################################
 # test telegram
@@ -128,9 +128,11 @@ class aidon(object):
             self.r = bytes(telegram)
         else:
             while True:
+                starttime = time.time()
                 self.r = self.ser.read(N)
+                print("{0:5.1}".format(1000*(time.time()-starttime)))
                 M = len(self.r)
-                print("*")
+
                 if M == N:
                     break
 
