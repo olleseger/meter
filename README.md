@@ -17,6 +17,7 @@ There it is! The brand new Aidon 6534 power meter. It has an `RJ12` connector. Y
 - A [USB-serial cable](https://www.kjell.com/se/produkter/el-verktyg/arduino/moduler/luxorparts-usb-till-seriell-adapter-for-arduino-p88064)
 - A 10 k resistor
 - The program `ft232r_prog` for reprogramming the FTDI chip on the USB-serial cable.
+- (An Intel NUC with Home Assistant)
 
 ## Connecting the RaspberryPi to the Aidon 6534
 Connect the USB-serial cable to the Raspberry Pi. 
