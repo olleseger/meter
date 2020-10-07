@@ -180,10 +180,6 @@ class aidon(object):
                 print("{0:02x}".format(self.r[i]), end=" ")
             print("")
 
-        if packagelen != 579:
-            with open('package.txt', 'w') as file:
-                file.write(str(self.r))
-            
         # strip header and trailer
         self.r = self.r[N_header:-2]
 
