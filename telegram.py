@@ -206,9 +206,12 @@ class aidon(object):
                 month = self.r[14]
                 day = self.r[15]
                 # wd = self.r[16] # weekday
-                hour = self.r[17] + 1
+                hour = self.r[17]
                 min = self.r[18]
                 sec = self.r[19]
+
+                if r[N_line-1] & 0x80:
+                    hour += 1  # summer time
                 print(fmt.format(year, month, day, hour, min, sec), end="\t")
             else:
                 key = self.r[10]
