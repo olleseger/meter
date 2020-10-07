@@ -174,8 +174,9 @@ and you will get this:
 ![bild](bilder/Homeassistant.JPG)
 
 ## Bibliography
+### Data format
 * [Aidon RJ12 HAN Gränssnitt](dokument/Aidon.pdf)
-* [The Green Book](https://www.dlms.com/files/Green-Book-Ed-83-Excerpt.pdf)
-
+* [The Green Book](https://www.dlms.com/files/Green_Book_Edition_9-Excerpt.pdf)
+* [The Blue Book](https://www.dlms.com/files/Blue_Book_Edition_13-Excerpt.pdf)
 
 
