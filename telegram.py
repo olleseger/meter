@@ -136,9 +136,7 @@ class aidon(object):
     # Check CRC
     ############################
     def check_frame(self):
-        if self.r[0] == flag and self.r[-1] == flag:
-            print("Flags OK! first=last= 0x{0:02x}".format(self.r[0]))
-        else:
+        if self.r[0] != flag or self.r[-1] != flag:
             print("Flags not OK! first= 0x{0:02x} last= 0x{1:02x}".format(self.r[0], self.r[-1]))
             return False
 
@@ -147,18 +145,14 @@ class aidon(object):
         
         packagelen = int.from_bytes(self.r[0:2], byteorder="big") & 0xfff
         
-        if (packagelen) == len(self.r):
-            print("Length OK! from header=received={0:4d}".format(packagelen))
-        else:
+        if (packagelen) != len(self.r):
             print("Length not OK! from header={0:4d} received={0:4d}".format(packagelen, len(self.r)))
             return False
 
         crc1 = libscrc.x25(self.r[0:-2])
         self.crc2 = int.from_bytes(self.r[-2:], byteorder="little")
     
-        if crc1 == self.crc2:
-            print("CRC OK! calculated=sent= 0x{0:04x}".format(crc1))
-        else:
+        if crc1 != self.crc2:
             print("CRC not OK! calculated= 0x{0:04x} sent= 0x{1:04x}".format(crc1, self.crc2))
             return False
 
