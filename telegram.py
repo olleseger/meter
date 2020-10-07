@@ -127,6 +127,7 @@ class aidon(object):
 
     ############################
     # try to read one frame
+    # TODO: read flag first, then length and then the bytes
     ############################
     def read_frame(self):
         if self.debug:
