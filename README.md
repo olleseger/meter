@@ -119,7 +119,7 @@ Cumulative reactive energy-   =   0.0 kVArh     02 03 09 06 01 00 04 08 00 ff 06
 CRC:                                            40be
 Flag:                                           7e
 ```
-As can clearly be seen this is binary communication not ASCII! The fram starts and ends withe same flag: `0x7e`.
+As can clearly be seen this is binary communication not ASCII! The fram starts and ends with same flag: `0x7e`.
 
 ## Home Assistant
 
