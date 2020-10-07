@@ -130,7 +130,7 @@ class aidon(object):
             while True:
                 starttime = time.time()
                 self.r = self.ser.read(N)
-                print("{0:5.1}".format(1000*(time.time()-starttime)))
+                print("{0:5.1f ms}".format(1000*(time.time()-starttime)))
                 M = len(self.r)
 
                 if M == N:
