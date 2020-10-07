@@ -102,7 +102,6 @@ aidon_strings = {
 
 class aidon(object):
     def __init__(self, serial_port = "/dev/ttyUSB0",
-                 hostname = "192.168.1.29",
                  debug = False):
 
         self.debug = debug
@@ -115,10 +114,16 @@ class aidon(object):
                                      bytesize=serial.EIGHTBITS,
                                      timeout=2.0)
 
+            try:
+                from secrets import secrets
+            except ImportError:
+                print("MQTT secrets are kept in secrets.py!")
+                raise
+            
             self.client = mqtt.Client("Aidon")
-            self.client.username_pw_set(username="homeassistant",
-                                        password="eidou8poo8odaibae5Phob7ooheingo4UFaef5aecheiphie6ShaeDe0eemahY2y")
-            self.client.connect(hostname)
+            self.client.username_pw_set(username = secrets["username"]),
+                                        password = secrets["password"])
+            self.client.connect(secrets["hostname"])
 
     ############################
     # try to read one frame
