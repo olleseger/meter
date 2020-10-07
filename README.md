@@ -188,6 +188,7 @@ and you will get this:
 
 ## Bibliography
 ### Data format
+* [kode24](https://www.kode24.no/guider/smart-meter-part-1-getting-the-meter-data/71287300)
 * [Aidon RJ12 HAN Gränssnitt](dokument/Aidon.pdf)
 * [The Green Book](https://www.dlms.com/files/Green_Book_Edition_9-Excerpt.pdf)
 * [The Blue Book](https://www.dlms.com/files/Blue_Book_Edition_13-Excerpt.pdf)
