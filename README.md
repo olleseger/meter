@@ -126,7 +126,10 @@ As can clearly be seen this is binary communication not ASCII! The frame starts 
 | ----        | ----           |
 | 7e          |  Start flag         |
 | a           |  4 bits,  a = Frame Format Type 3 (0b1010)
-| 243         | 12 bits, frame size 0x243 = 579 bytes excluding start/stop flags          |
+| 243         | 12 bits, frame size 0x243 = 579 bytes excluding start/stop flags  
+| (...)       |                |
+|  40be       | FCS = frame check sum, calculated on everything except start/stop flags and FCS. Use CRC16-X25 |
+| 7e          | Stop flag      |
 
 
 ## Home Assistant
