@@ -120,6 +120,9 @@ class aidon(object):
                                         password="eidou8poo8odaibae5Phob7ooheingo4UFaef5aecheiphie6ShaeDe0eemahY2y")
             self.client.connect(hostname)
 
+    ############################
+    # try to read one frame
+    ############################
     def read_frame(self):
         if self.debug:
             self.r = bytes(telegram)
@@ -127,6 +130,7 @@ class aidon(object):
             while True:
                 self.r = self.ser.read(1024)
                 M = len(self.r)
+                print("*")
                 if M > 0:
                     break
 
