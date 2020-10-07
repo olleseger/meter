@@ -6,6 +6,7 @@
 * [Things needed](#things-needed)
 * [Connecting the Raspberry Pi to the Aidon 6534](#connecting-the-raspberrypi-to-the-aidon-6534)
 * [Running the program](#running-the-program)
+* [Breakdown](#breakdown)
 * [Home Assistant](#home-assistant)
 
 ## Introduction 
@@ -125,8 +126,9 @@ As can clearly be seen this is binary communication not ASCII! The frame starts 
 | Data        |  Explanation  |
 | ----        | ----           |
 | 7e          |  Start flag         |
-| a           |  4 bits,  a = Frame Format Type 3 (0b1010)
-| 243         | 12 bits, frame size 0x243 = 579 bytes excluding start/stop flags  
+| a           |  4 bits,  a = Frame Format Type 3 (0b1010) |
+| 243         | 12 bits, frame size = 0x243 = 579 bytes excluding start/stop flags  |
+|||
 | (...)       |                |
 |  40be       | FCS = frame check sum, calculated on everything except start/stop flags and FCS. Use CRC16-X25 |
 | 7e          | Stop flag      |
