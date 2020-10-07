@@ -205,6 +205,7 @@ class aidon(object):
                 year = int.from_bytes(self.r[12:14], byteorder="big")
                 month = self.r[14]
                 day = self.r[15]
+                # wd = self.r[16] # weekday
                 hour = self.r[17] + 1
                 min = self.r[18]
                 sec = self.r[19]
