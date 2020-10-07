@@ -31,8 +31,8 @@ Then connect an RJ12 cable to the USB-serial cable like this:
 | 5 - Data         | RxD            |
 | 6 - (GND)        |                |
 
-Connect the two GNDs and +5V to RTS. The `Data` output is `open collector` so it needs a pull-up resistor. Connect a 10k resistor between +5V and RxD on the FTDI. 
-Furthermore the `Data` ouput is inverted. Therefore the RxD input on the USB-serial cable needs to be inverted. Fortunatele there is a program for this: `ft232r_prog`.
+Connect the two GNDs and +5V to RTS. The `Data` output is `open collector` so it needs a pull-up resistor. Connect a 10k resistor between +5V and RxD. 
+Furthermore the `Data` ouput is inverted. Therefore the RxD input on the USB-serial cable needs to be inverted. Fortunately there is a program for this: `ft232r_prog`.
 
 Aidon uses `115200,8N1` serial communication. 
 
@@ -173,7 +173,8 @@ cards:
 and you will get this:
 ![bild](bilder/Homeassistant.JPG)
 
-
+## Bibliography
+* [Aidon RJ12 HAN Gränssnitt](dokument/Aidon.pdf):
 
 
 
