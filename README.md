@@ -42,10 +42,6 @@ python3 aidon.py
 ```
 This is the printout from our meter:
 ```
-Flags OK! first=last= 0x7e
-Length OK! from header=received= 579
-CRC OK! calculated=sent= 0x69f1
-Nr of registers =   27
 Timestamp: 2020-10-06 17:57:10
 Momentary active power+       =  720 W
 Momentary active power-       =    0 W
