@@ -121,7 +121,7 @@ class aidon(object):
                 raise
             
             self.client = mqtt.Client("Aidon")
-            self.client.username_pw_set(username = secrets["username"]),
+            self.client.username_pw_set(username = secrets["username"],
                                         password = secrets["password"])
             self.client.connect(secrets["hostname"])
 
