@@ -178,5 +178,8 @@ and you will get this:
 * [Aidon RJ12 HAN Gränssnitt](dokument/Aidon.pdf)
 * [The Green Book](https://www.dlms.com/files/Green_Book_Edition_9-Excerpt.pdf)
 * [The Blue Book](https://www.dlms.com/files/Blue_Book_Edition_13-Excerpt.pdf)
+### Home Assistant
+* [The web site](https://www.home-assistant.io/)
+* [Awesome Home Assistant](https://github.com/isabellaalstrom/home-assistant-config)
 
 
