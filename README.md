@@ -1,4 +1,4 @@
-# Reading the Aidon 6534
+# Reading the Aidon 6534 power meter
 
 ## Table of Contents
 
@@ -10,7 +10,8 @@
 
 ## Introduction 
 ![bild](bilder/aidon.jpg)
-There it is! The brand new Aidon 6534 power meter. It has a RJ12 connector
+There it is! The brand new Aidon 6534 power meter. It has an `RJ12` connector. You can read 27 measurement values from it.
+
 ## Things needed
 - A Raspberry Pi 4
 - A [USB-serial cable](https://www.kjell.com/se/produkter/el-verktyg/arduino/moduler/luxorparts-usb-till-seriell-adapter-for-arduino-p88064)
@@ -18,20 +19,22 @@ There it is! The brand new Aidon 6534 power meter. It has a RJ12 connector
 - The program `ft232r_prog` for reprogramming the FTDI chip on the USB-serial cable.
 
 ## Connecting the RaspberryPi to the Aidon 6534
-Connect the Raspberry Pi to a USB-serial cable. 
-Then connect an RJ12 cable to the USB-serial cable:
+Connect the USB-serial cable to the Raspberry Pi. 
+Then connect an RJ12 cable to the USB-serial cable like this:
 
 | Aidon-RJ12       |  USB-serial cable  |
 | ----             | ----           |
-| 1 - 5V           |                |
-| 2 - RTS          | 5V             |
+| 1 - (5V)         |                |
+| 2 - RTS          | +5V            |
 | 3 - GND          | GND            |
 | 4 -              |                |
 | 5 - Data         | RxD            |
-| 6 - GND          |                |
+| 6 - (GND)        |                |
 
-A 10k resistor is connected between 5V and RxD on the FTDI. The RxD input on the USB-serial cable is inverted with the program `ft232r_prog`.
-Aidon uses `115200,8N1` serial communication. The `Data` output is `open collector` and inverted.
+Connect the two GNDs and +5V to RTS. The `Data` output is `open collector` so it needs a pull-up resistor. Connect a 10k resistor between +5V and RxD on the FTDI. 
+Furthermore the `Data` ouput is inverted. Therefore the RxD input on the USB-serial cable needs to be inverted. Fortunatele there is a program for this: `ft232r_prog`.
+
+Aidon uses `115200,8N1` serial communication. 
 
 ![bild](bilder/kjell.jpg)
 
