@@ -210,7 +210,7 @@ class aidon(object):
                 min = self.r[18]
                 sec = self.r[19]
 
-                if r[N_line-1] & 0x80:
+                if self.r[N_line-1] & 0x80:
                     hour += 1  # summer time
                 print(fmt.format(year, month, day, hour, min, sec), end="\t")
             else:
