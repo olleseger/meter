@@ -174,7 +174,7 @@ and you will get this:
 ![bild](bilder/Homeassistant.JPG)
 
 ## Bibliography
-* [Aidon RJ12 HAN Gränssnitt](dokument/Aidon.pdf):
+* [Aidon RJ12 HAN Gränssnitt](dokument/Aidon.pdf)
 
 
 
