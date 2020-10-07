@@ -128,10 +128,10 @@ class aidon(object):
             self.r = bytes(telegram)
         else:
             while True:
-                self.r = self.ser.read(1024)
+                self.r = self.ser.read(N)
                 M = len(self.r)
                 print("*")
-                if M > 0:
+                if M == N:
                     break
 
     ############################
