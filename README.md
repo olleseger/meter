@@ -1,4 +1,4 @@
-# Aidon 6534
+# Reading the Aidon 6534
 
 ## Table of Contents
 
@@ -10,7 +10,7 @@
 
 ## Introduction 
 ![bild](bilder/aidon.jpg)
-
+There it is! The brand new Aidon 6534 power meter. It has a RJ12 connector
 ## Things needed
 - A Raspberry Pi 4
 - A [USB-serial cable](https://www.kjell.com/se/produkter/el-verktyg/arduino/moduler/luxorparts-usb-till-seriell-adapter-for-arduino-p88064)
