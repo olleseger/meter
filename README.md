@@ -6,7 +6,6 @@
 * [Things needed](#things-needed)
 * [Connecting the Raspberry Pi to the Aidon 6534](#connecting-the-raspberrypi-to-the-aidon-6534)
 * [Running the program](#running-the-program)
-* [Breakdown](#breakdown)
 * [Home Assistant](#home-assistant)
 
 ## Introduction 
@@ -120,19 +119,7 @@ Cumulative reactive energy-   =   0.0 kVArh     02 03 09 06 01 00 04 08 00 ff 06
 CRC:                                            40be
 Flag:                                           7e
 ```
-As can clearly be seen this is binary communication not ASCII! The frame starts and ends with same flag: `0x7e`.
-
-## Breakdown
-| Data        |  Explanation  |
-| ----        | ----           |
-| 7e          |  Start flag         |
-| a           |  4 bits,  a = Frame Format Type 3 (0b1010) |
-| 243         | 12 bits, frame size = 0x243 = 579 bytes excluding start/stop flags  |
-|||
-| (...)       |                |
-|  40be       | FCS = frame check sum, calculated on everything except start/stop flags and FCS. Use CRC16-X25 |
-| 7e          | Stop flag      |
-
+As can clearly be seen this is binary communication not ASCII! The frame starts and ends with the same flag: `0x7e`.
 
 ## Home Assistant
 
@@ -188,12 +175,12 @@ and you will get this:
 
 ## Bibliography
 ### Data format
-* [kode24](https://www.kode24.no/guider/smart-meter-part-1-getting-the-meter-data/71287300)
+* [kode24](https://www.kode24.no/guider/smart-meter-part-1-getting-the-meter-data/71287300). An excellent breakdown of the data format.
 * [Aidon RJ12 HAN Gränssnitt](dokument/Aidon.pdf)
 * [The Green Book](https://www.dlms.com/files/Green_Book_Edition_9-Excerpt.pdf)
 * [The Blue Book](https://www.dlms.com/files/Blue_Book_Edition_13-Excerpt.pdf)
 ### Home Assistant
 * [The web site](https://www.home-assistant.io/)
-* [Awesome Home Assistant](https://github.com/isabellaalstrom/home-assistant-config)
+* [Awesome Home Assistant](https://github.com/isabellaalstrom/home-assistant-config). I don't publish my Home Assistant installation. Have a look at this instead!
 
 
