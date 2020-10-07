@@ -188,5 +188,6 @@ and you will get this:
 ### Home Assistant
 * [The web site](https://www.home-assistant.io/)
 * [Awesome Home Assistant](https://github.com/isabellaalstrom/home-assistant-config). I don't publish my Home Assistant installation. Have a look at this instead!
-
+### Hardware
+* [ft232r_prog](https://github.com/eswierk/ft232r_prog)
 
