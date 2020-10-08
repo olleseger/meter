@@ -105,7 +105,7 @@ class aidon(object):
                  debug = False):
 
         self.debug = debug
-
+        
         if not debug:
             self.ser = serial.Serial(port = serial_port,
                                      baudrate = 115200,
