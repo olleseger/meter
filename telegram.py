@@ -70,33 +70,33 @@ values = {
 
 # obis_key : format string
 aidon_strings = {
-    0x00000100 : "Timestamp: {0:4d}-{1:02d}-{2:02d} {3:02d}:{4:02d}:{5:02d}\t\t",
-    0x01000107 : "Momentary active power+       = {0:4d} {1:s}\t",
-    0x01000207 : "Momentary active power-       = {0:4d} {1:s}\t",
-    0x01000307 : "Momentary reactive power+     = {0:4d} {1:s}",
-    0x01000407 : "Momentary reactive power-     = {0:4d} {1:s}",
-    0x01001f07 : "Momentary current (L1)        = {0:3.1f} {1:s}\t",
-    0x01003307 : "Momentary current (L2)        = {0:3.1f} {1:s}\t",
-    0x01004707 : "Momentary current (L3)        = {0:3.1f} {1:s}\t",
-    0x01002007 : "Momentary voltage (L1)        = {0:3.1f} {1:s}\t",
-    0x01003407 : "Momentary voltage (L2)        = {0:3.1f} {1:s}\t",
-    0x01004807 : "Momentary voltage (L3)        = {0:3.1f} {1:s}\t",
-    0x01001507 : "Momentary active power+ (L1)  = {0:4d} {1:s}\t",
-    0x01001607 : "Momentary active power- (L1)  = {0:4d} {1:s}\t",
-    0x01001707 : "Momentary reactive power+ (L1)= {0:4d} {1:s}",
-    0x01001807 : "Momentary reactive power- (L1)= {0:4d} {1:s}",
-    0x01002907 : "Momentary active power+ (L2)  = {0:4d} {1:s}\t",
-    0x01002a07 : "Momentary active power- (L2)  = {0:4d} {1:s}\t",
-    0x01002b07 : "Momentary reactive power+ (L2)= {0:4d} {1:s}",
-    0x01002c07 : "Momentary reactive power- (L2)= {0:4d} {1:s}",
-    0x01003d07 : "Momentary active power+ (L3)  = {0:4d} {1:s}\t",
-    0x01003e07 : "Momentary active power- (L3)  = {0:4d} {1:s}\t",
-    0x01003f07 : "Momentary reactive power+ (L3)= {0:4d} {1:s}",
-    0x01004007 : "Momentary reactive power- (L3)= {0:4d} {1:s}",
-    0x01000108 : "Cumulative active energy+     = {0:5.1f} {1:s}",
-    0x01000208 : "Cumulative active energy-     = {0:5.1f} {1:s}",
-    0x01000308 : "Cumulative reactive energy+   = {0:5.1f} {1:s}",
-    0x01000408 : "Cumulative reactive energy-   = {0:5.1f} {1:s}",
+    0x00000100 : "Timestamp: {0:4d}-{1:02d}-{2:02d} {3:02d}:{4:02d}:{5:02d}\t\t\t",
+    0x01000107 : "Momentary active power+       = {0:4d} {1:s}\t\t",
+    0x01000207 : "Momentary active power-       = {0:4d} {1:s}\t\t",
+    0x01000307 : "Momentary reactive power+     = {0:4d} {1:s}\t",
+    0x01000407 : "Momentary reactive power-     = {0:4d} {1:s}\t",
+    0x01001f07 : "Momentary current (L1)        = {0:3.1f} {1:s}\t\t",
+    0x01003307 : "Momentary current (L2)        = {0:3.1f} {1:s}\t\t",
+    0x01004707 : "Momentary current (L3)        = {0:3.1f} {1:s}\t\t",
+    0x01002007 : "Momentary voltage (L1)        = {0:3.1f} {1:s}\t\t",
+    0x01003407 : "Momentary voltage (L2)        = {0:3.1f} {1:s}\t\t",
+    0x01004807 : "Momentary voltage (L3)        = {0:3.1f} {1:s}\t\t",
+    0x01001507 : "Momentary active power+ (L1)  = {0:4d} {1:s}\t\t",
+    0x01001607 : "Momentary active power- (L1)  = {0:4d} {1:s}\t\t",
+    0x01001707 : "Momentary reactive power+ (L1)= {0:4d} {1:s}\t",
+    0x01001807 : "Momentary reactive power- (L1)= {0:4d} {1:s}\t",
+    0x01002907 : "Momentary active power+ (L2)  = {0:4d} {1:s}\t\t",
+    0x01002a07 : "Momentary active power- (L2)  = {0:4d} {1:s}\t\t",
+    0x01002b07 : "Momentary reactive power+ (L2)= {0:4d} {1:s}\t",
+    0x01002c07 : "Momentary reactive power- (L2)= {0:4d} {1:s}\t",
+    0x01003d07 : "Momentary active power+ (L3)  = {0:4d} {1:s}\t\t",
+    0x01003e07 : "Momentary active power- (L3)  = {0:4d} {1:s}\t\t",
+    0x01003f07 : "Momentary reactive power+ (L3)= {0:4d} {1:s}\t",
+    0x01004007 : "Momentary reactive power- (L3)= {0:4d} {1:s}\t",
+    0x01000108 : "Cumulative active energy+     = {0:5.1f} {1:s}\t",
+    0x01000208 : "Cumulative active energy-     = {0:5.1f} {1:s}\t",
+    0x01000308 : "Cumulative reactive energy+   = {0:5.1f} {1:s}\t",
+    0x01000408 : "Cumulative reactive energy-   = {0:5.1f} {1:s}\t",
 }
 
 
@@ -195,6 +195,7 @@ class aidon(object):
     ############################
     def decode_frame(self):
         self.measurements = []
+        str = ""
         for lines in range(self.N_lines):
             obis = int.from_bytes(self.r[4:8], byteorder="big")
             fmt = aidon_strings[obis]
@@ -212,7 +213,8 @@ class aidon(object):
 
                 if self.r[N_line-1] & 0x80:
                     hour += 1  # summer time
-                print(fmt.format(year, month, day, hour, min, sec), end="\t")
+                    
+                str += fmt.format(year, month, day, hour, min, sec)
             else:
                 key = self.r[10]
                 nr = values[key][0]
@@ -229,24 +231,22 @@ class aidon(object):
                     p = p/dv
                 
                 self.measurements.append(p)
-                print(fmt.format(p, un), end="\t")
+                str += fmt.format(p, un)
 
             if self.debug:
-                #print("\n\nOBIS={0:d}-{1:d}:{2:d}.{3:d}.{4:d}.{5:d}".format(r[4], r[5], r[6], r[7], r[8], r[9]), end=" ")
                 for i in range(N_line):
-                    print("{0:02x}".format(self.r[i]), end=" ")
-            print("")
+                    str += "{0:02x} ".format(self.r[i])
+
+            str += "\n"
         
             self.r = self.r[N_line:]
 
         if self.debug:
-            print("CRC:", end="\t\t\t\t\t\t")
-            print("{0:04x}".format(self.crc2))
-            print("Flag:", end="\t\t\t\t\t\t")
-            print("{0:02x}".format(flag))
+            str += "CRC:\t\t\t\t\t\t{0:04x}\n".format(self.crc2)
+            str += "Flag:\t\t\t\t\t\t{0:02x}".format(flag)
 
-        print("")
-
+        print(str)
+        
         
     ############################
     # Publicera till MQTT
