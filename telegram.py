@@ -102,9 +102,10 @@ aidon_strings = {
 
 class aidon(object):
     def __init__(self, serial_port = "/dev/ttyUSB0",
-                 debug = False):
+                 debug = False, verbose = False):
 
         self.debug = debug
+        self.verbose = verbose
         
         if not debug:
             self.ser = serial.Serial(port = serial_port,
@@ -117,7 +118,8 @@ class aidon(object):
             try:
                 from secrets import secrets
             except ImportError:
-                print("MQTT secrets are kept in secrets.py!")
+                if self.verbose:
+                    print("MQTT secrets are kept in secrets.py!")
                 raise
             
             self.client = mqtt.Client("Aidon")
@@ -146,7 +148,8 @@ class aidon(object):
     ############################
     def check_frame(self):
         if self.r[0] != flag or self.r[-1] != flag:
-            print("Flags not OK! first= 0x{0:02x} last= 0x{1:02x}".format(self.r[0], self.r[-1]))
+            if self.verbose:
+                print("Flags not OK! first= 0x{0:02x} last= 0x{1:02x}".format(self.r[0], self.r[-1]))
             return False
 
         # strip flags
@@ -155,14 +158,16 @@ class aidon(object):
         packagelen = int.from_bytes(self.r[0:2], byteorder="big") & 0xfff
         
         if (packagelen) != len(self.r):
-            print("Length not OK! from header={0:4d} received={0:4d}".format(packagelen, len(self.r)))
+            if self.verbose:
+                print("Length not OK! from header={0:4d} received={0:4d}".format(packagelen, len(self.r)))
             return False
 
         crc1 = libscrc.x25(self.r[0:-2])
         self.crc2 = int.from_bytes(self.r[-2:], byteorder="little")
     
         if crc1 != self.crc2:
-            print("CRC not OK! calculated= 0x{0:04x} sent= 0x{1:04x}".format(crc1, self.crc2))
+            if self.verbose:
+                print("CRC not OK! calculated= 0x{0:04x} sent= 0x{1:04x}".format(crc1, self.crc2))
             return False
 
         frameheader = self.r[3:12]
@@ -245,7 +250,8 @@ class aidon(object):
             str += "CRC:\t\t\t\t\t\t{0:04x}\n".format(self.crc2)
             str += "Flag:\t\t\t\t\t\t{0:02x}".format(flag)
 
-        print(str)
+        if self.verbose:
+            print(str)
         
         
     ############################

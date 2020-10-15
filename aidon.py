@@ -6,10 +6,16 @@ if __name__ == "__main__":
         if str(sys.argv[1]) == "-d":
             print("debug")
             dbg = True
+            vrb = True
+        elif str(sys.argv[1]) == "-v":
+            print("verbose")
+            vrb = True
+            dbg = False
     else:
         dbg = False
-
-    meter = aidon(debug=dbg)
+        vrb = False
+        
+    meter = aidon(debug=dbg, verbose=vrb)
 
     while True:
         meter.read_frame()

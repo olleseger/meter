@@ -32,8 +32,7 @@ Then connect an RJ12 cable to the USB-serial cable like this:
 | 5 - Data         | RxD            |
 | 6 - (GND)        |                |
 
-Connect the two GNDs and +5V to RTS. The `Data` output is `open collector` so it needs a pull-up resistor. Connect a 10k resistor between +5V and RxD. 
-Furthermore the `Data` ouput is inverted. Therefore the RxD input on the USB-serial cable needs to be inverted. Fortunately there is a program for this: `ft232r_prog`.
+Connect the two GNDs and +5V to RTS. The `Data` output is `open collector` so it needs a pull-up resistor. Connect a 10k resistor between +5V and RxD. Furthermore the `Data` ouput is inverted. Therefore the RxD input on the USB-serial cable needs to be inverted. Fortunately there is a program for this: `ft232r_prog`.
 [Clone](https://github.com/eswierk/ft232r_prog) and `make`. Then give the command:
 ```bash
 ./ft232r_prog --help
@@ -49,7 +48,7 @@ Run the program by:
 ```bash
 python3 aidon.py
 ```
-This is the printout from our meter:
+If you use the command `python3 aidon.py -v` you get a printout. This is the printout from our meter:
 ```
 Timestamp: 2020-10-06 17:57:10
 Momentary active power+       =  720 W
