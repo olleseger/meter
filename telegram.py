@@ -262,6 +262,14 @@ class aidon(object):
         rp = self.measurements[2] - self.measurements[3]
         fi = 180*math.atan2(rp,ap)/math.pi
 
+        i1 = self.measurements[4]
+        i2 = self.measurements[5]
+        i3 = self.measurements[6]
+
+        v1 = self.measurements[7]
+        v2 = self.measurements[8]
+        v3 = self.measurements[9]
+
         ap1 = self.measurements[10] - self.measurements[11]
         rp1 = self.measurements[12] - self.measurements[13]
         fi1 = 180*math.atan2(rp1, ap1)/math.pi
@@ -281,14 +289,14 @@ class aidon(object):
         if not self.debug:
             self.client.publish("meter/activepower", ap)
             self.client.publish("meter/fi", fi)
-        
-            self.client.publish("meter/current1", self.measurements[4])
-            self.client.publish("meter/current2", self.measurements[5])
-            self.client.publish("meter/current3", self.measurements[6])
+            self.client.publish("meter/activepower", ap)        
+            self.client.publish("meter/current1", i1)
+            self.client.publish("meter/current2", i2)
+            self.client.publish("meter/current3", i3)
 
-            self.client.publish("meter/voltage1", self.measurements[7])
-            self.client.publish("meter/voltage2", self.measurements[8])
-            self.client.publish("meter/voltage3", self.measurements[9])
+            self.client.publish("meter/voltage1", v1)
+            self.client.publish("meter/voltage2", v2)
+            self.client.publish("meter/voltage3", v3)
 
             self.client.publish("meter/activepower1", ap1)
             self.client.publish("meter/fi1", fi1)
