@@ -118,9 +118,7 @@ class aidon(object):
             try:
                 from secrets import secrets
             except ImportError:
-                if self.verbose:
-                    print("MQTT secrets are kept in secrets.py!")
-                raise
+                print("MQTT secrets are kept in secrets.py!")
             
             self.client = mqtt.Client("Aidon")
             self.client.username_pw_set(username = secrets["username"],
@@ -289,7 +287,7 @@ class aidon(object):
         if not self.debug:
             self.client.publish("meter/activepower", ap)
             self.client.publish("meter/fi", fi)
-            self.client.publish("meter/activepower", ap)        
+
             self.client.publish("meter/current1", i1)
             self.client.publish("meter/current2", i2)
             self.client.publish("meter/current3", i3)
