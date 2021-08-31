@@ -18,7 +18,9 @@ if __name__ == "__main__":
     meter = aidon(debug=dbg, verbose=vrb)
 
     while True:
-        meter.read_frame()
+        if not meter.read_frame():
+            continue
+
         if not meter.check_frame():
             continue
 

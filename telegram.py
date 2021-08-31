@@ -113,7 +113,10 @@ class aidon(object):
                                      parity=serial.PARITY_NONE,
                                      stopbits=serial.STOPBITS_ONE,
                                      bytesize=serial.EIGHTBITS,
-                                     timeout=2.0)
+                                     timeout=5.1,
+                                     rtscts=False,
+                                     dsrdtr=False,
+                                     xonxoff=False)
 
             try:
                 from secrets import secrets
@@ -133,11 +136,16 @@ class aidon(object):
         if self.debug:
             self.r = bytes(telegram)
         else:
-            while True:
-                self.r = self.ser.read(N)
-                M = len(self.r)
-                if M == N:
-                    break
+            self.r = self.ser.read(N)
+            M = len(self.r)
+            if M == N:
+                print("Read frame M={0:3}".format(M))
+                return True
+            else:
+                print("Read error M={0:3}".format(M))
+                self.ser.close()
+                self.ser.open()
+                return False
 
     ############################
     # Check flags
