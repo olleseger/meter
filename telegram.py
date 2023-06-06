@@ -104,6 +104,9 @@ class aidon(object):
     def __init__(self, serial_port = "/dev/ttyUSB0",
                  debug = False, verbose = False):
 
+        def on_publish(client, userdata, mid):
+            print("on_publish, mid={0:3}".format(mid))
+
         self.debug = debug
         self.verbose = verbose
         
@@ -126,7 +129,9 @@ class aidon(object):
             self.client = mqtt.Client("Aidon")
             self.client.username_pw_set(username = secrets["username"],
                                         password = secrets["password"])
+            #self.client.on_publish = on_publish # callback
             self.client.connect(secrets["hostname"])
+            self.client.loop_start()
 
     ############################
     # try to read one frame
@@ -139,12 +144,12 @@ class aidon(object):
             self.r = self.ser.read(N)
             M = len(self.r)
             if M == N:
-                print("Read frame M={0:3}".format(M))
+                if self.verbose:
+                    print("Read frame M={0:3}".format(M))
                 return True
             else:
-                print("Read error M={0:3}".format(M))
-                self.ser.close()
-                self.ser.open()
+                if self.verbose:
+                    print("Read error M={0:3}".format(M))
                 return False
 
     ############################
