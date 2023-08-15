@@ -269,53 +269,38 @@ class aidon(object):
     # Publicera till MQTT
     ############################
     def publish_frame(self):
-        ap = self.measurements[0] - self.measurements[1]
-        rp = self.measurements[2] - self.measurements[3]
-        fi = 180*math.atan2(rp,ap)/math.pi
-
-        i1 = self.measurements[4]
-        i2 = self.measurements[5]
-        i3 = self.measurements[6]
-
-        v1 = self.measurements[7]
-        v2 = self.measurements[8]
-        v3 = self.measurements[9]
-
-        ap1 = self.measurements[10] - self.measurements[11]
-        rp1 = self.measurements[12] - self.measurements[13]
-        fi1 = 180*math.atan2(rp1, ap1)/math.pi
-
-        ap2 = self.measurements[14] - self.measurements[15]
-        rp2 = self.measurements[16] - self.measurements[17]
-        fi2 = 180*math.atan2(rp2, ap2)/math.pi
-
-        ap3 = self.measurements[18] - self.measurements[19]
-        rp3 = self.measurements[20] - self.measurements[21]
-        fi3 = 180*math.atan2(rp3, ap3)/math.pi
-
-        ae = self.measurements[22] - self.measurements[23]
-        re = self.measurements[24] - self.measurements[25]
-        fie = 180*math.atan2(re, ae)/math.pi
-
         if not self.debug:
-            self.client.publish("meter/activepower", ap)
-            self.client.publish("meter/fi", fi)
+            self.client.publish("meter/activepowerimp", self.measurements[0])
+            self.client.publish("meter/activepowerexp", self.measurements[1])
+            self.client.publish("meter/reactivepowerimp", self.measurements[2])
+            self.client.publish("meter/reactivepowerexp", self.measurements[3])
 
-            self.client.publish("meter/current1", i1)
-            self.client.publish("meter/current2", i2)
-            self.client.publish("meter/current3", i3)
+            self.client.publish("meter/current1", self.measurements[4])
+            self.client.publish("meter/current2", self.measurements[5])
+            self.client.publish("meter/current3", self.measurements[6])
 
-            self.client.publish("meter/voltage1", v1)
-            self.client.publish("meter/voltage2", v2)
-            self.client.publish("meter/voltage3", v3)
+            self.client.publish("meter/voltage1", self.measurements[7])
+            self.client.publish("meter/voltage2", self.measurements[8])
+            self.client.publish("meter/voltage3", self.measurements[9])
 
-            self.client.publish("meter/activepower1", ap1)
-            self.client.publish("meter/fi1", fi1)
-            self.client.publish("meter/activepower2", ap2)
-            self.client.publish("meter/fi2", fi2)
-            self.client.publish("meter/activepower3", ap3)
-            self.client.publish("meter/fi3", fi3)
+            self.client.publish("meter/activepower1imp", self.measurements[10])
+            self.client.publish("meter/activepower1exp", self.measurements[11])
+            self.client.publish("meter/reactivepower1imp", self.measurements[12])
+            self.client.publish("meter/reactivepower1exp", self.measurements[13])
+
+            self.client.publish("meter/activepower2imp", self.measurements[14])
+            self.client.publish("meter/activepower2exp", self.measurements[15])
+            self.client.publish("meter/reactivepower2imp", self.measurements[16])
+            self.client.publish("meter/reactivepower2exp", self.measurements[17])
+
+            self.client.publish("meter/activepower3imp", self.measurements[18])
+            self.client.publish("meter/activepower3exp", self.measurements[19])
+            self.client.publish("meter/reactivepower3imp", self.measurements[20])
+            self.client.publish("meter/reactivepower3exp", self.measurements[21])
         
-            self.client.publish("meter/activeenergy", ae)
-            self.client.publish("meter/fie", fie)
+            self.client.publish("meter/activeenergyimp", self.measurements[22])
+            self.client.publish("meter/activeenergyexp", self.measurements[23])
+            self.client.publish("meter/reactiveenergyimp", self.measurements[24])
+            self.client.publish("meter/reactiveenergyexp", self.measurements[25])
+
 
