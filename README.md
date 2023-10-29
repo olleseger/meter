@@ -131,26 +131,41 @@ As can clearly be seen this is binary communication not ASCII! The frame starts 
 The software publishes the following MQTT topics:
 
 ```
-meter/activepower
-meter/activepower1
-meter/activepower2
-meter/activepower3
-meter/voltage1
-meter/voltage2
-meter/voltage3
+meter/activepowerimp
+meter/activepowerexp
+meter/reactivepowerimp
+meter/reactivepowerexp
 meter/current1
 meter/current2
 meter/current3
-meter/activeenergy
+meter/voltage1
+meter/voltage2
+meter/voltage3
+meter/activepower1imp
+meter/activepower1exp
+meter/reactivepower1imp
+meter/reactivepower1exp
+meter/activepower2imp
+meter/activepower2exp
+meter/reactivepower2imp
+meter/reactivepower2exp
+meter/activepower3imp
+meter/activepower3exp
+meter/reactivepower3imp
+meter/reactivepower3exp
+meter/activeenergyimp
+meter/activeenergyexp
+meter/reactiveenergyimp
+meter/reactiveenergyexp
 ```
 
 Put this in a `.yaml` file:
 ```yaml
-sensor:
-  - platform: mqtt
-    state_topic: "meter/activepower"
-    name: "Active Power"
-    unit_of_measurement: "W"
+mqtt:
+  sensor:
+    - name: "Active Power Imp"
+      state_topic: "meter/activepowerimp"
+      unit_of_measurement: "W"
 #
 # and so on
 ```
@@ -165,7 +180,7 @@ cards:
       - type: gauge
         name: Effekt
         unit: 'W'
-        entity: sensor.active_power
+        entity: sensor.active_power_imp
         min: 0
         max: 11520
         severity:
