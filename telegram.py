@@ -54,9 +54,9 @@ N_trailer = 3
 # key : [unit divide_by]
 units = {
     0x1b : ["W", 1],
-    0x1d : ["VAr", 1],
+    0x1d : ["var", 1],
     0x1e : ["kWh", 1000.0],
-    0x20 : ["kVArh", 1000.0],
+    0x20 : ["kvarh", 1000.0],
     0x21 : ["A", 10.0],
     0x23 : ["V", 10.0]
 }

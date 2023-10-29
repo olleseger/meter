@@ -53,8 +53,8 @@ If you use the command `python3 aidon.py -v` you get a printout. This is the pri
 Timestamp: 2020-10-06 17:57:10
 Momentary active power+       =  720 W
 Momentary active power-       =    0 W
-Momentary reactive power+     =    0 VAr
-Momentary reactive power-     =  149 VAr
+Momentary reactive power+     =    0 var
+Momentary reactive power-     =  149 var
 Momentary current (L1)        = 2.2 A
 Momentary current (L2)        = 0.7 A
 Momentary current (L3)        = 0.4 A
@@ -63,20 +63,20 @@ Momentary voltage (L2)        = 234.7 V
 Momentary voltage (L3)        = 234.8 V
 Momentary active power+ (L1)  =  503 W
 Momentary active power- (L1)  =    0 W
-Momentary reactive power+ (L1)=    0 VAr
-Momentary reactive power- (L1)=  175 VAr
+Momentary reactive power+ (L1)=    0 var
+Momentary reactive power- (L1)=  175 var
 Momentary active power+ (L2)  =  147 W
 Momentary active power- (L2)  =    0 W
-Momentary reactive power+ (L2)=   80 VAr
-Momentary reactive power- (L2)=    0 VAr
+Momentary reactive power+ (L2)=   80 var
+Momentary reactive power- (L2)=    0 var
 Momentary active power+ (L3)  =   78 W
 Momentary active power- (L3)  =    0 W
-Momentary reactive power+ (L3)=    0 VAr
-Momentary reactive power- (L3)=   56 VAr
+Momentary reactive power+ (L3)=    0 var
+Momentary reactive power- (L3)=   56 var
 Cumulative active energy+     = 261.4 kWh
 Cumulative active energy-     =   0.0 kWh
-Cumulative reactive energy+   =   1.8 kVArh
-Cumulative reactive energy-   =  64.0 kVArh
+Cumulative reactive energy+   =   1.8 kvarh
+Cumulative reactive energy-   =  64.0 kvarh
 ```
 
 If you run the program with the debug flag:
