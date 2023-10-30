@@ -303,4 +303,7 @@ class aidon(object):
             self.client.publish("meter/reactiveenergyimp", self.measurements[24])
             self.client.publish("meter/reactiveenergyexp", self.measurements[25])
 
-
+            p = self.measurements[0] - self.measurements[1]
+            q = self.measurements[2] - self.measurements[3]
+            cosfi = round(p/math.sqrt(p*p + q*q), 2)
+            self.client.publish("meter/cosfi", cosfi)
