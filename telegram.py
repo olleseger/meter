@@ -305,5 +305,43 @@ class aidon(object):
 
             p = self.measurements[0] - self.measurements[1]
             q = self.measurements[2] - self.measurements[3]
-            cosfi = round(p/math.sqrt(p*p + q*q), 2)
+            s = math.sqrt(p*p + q*q)
+            cosfi = round(p/s, 2)
             self.client.publish("meter/cosfi", cosfi)
+
+            if p>0:
+                if q>0:
+                    quad=1
+                else:
+                    quad=4
+            else:
+                if q>0:
+                    quad=2
+                else:
+                    quad=3
+
+            self.client.publish("meter/quad", quad)
+            
+            # L1
+            p = self.measurements[10] - self.measurements[11]
+            q = self.measurements[12] - self.measurements[13]
+            s = math.sqrt(p*p + q*q)
+            cosfi = round(p/s, 2)
+            self.client.publish("meter/cosfi1", cosfi)
+
+            # L2
+            p = self.measurements[14] - self.measurements[15]
+            q = self.measurements[16] - self.measurements[17]
+            s = math.sqrt(p*p + q*q)
+            cosfi = round(p/s, 2)
+            self.client.publish("meter/cosfi2", cosfi)
+
+            # L3
+            p = self.measurements[18] - self.measurements[19]
+            q = self.measurements[20] - self.measurements[21]
+            s = math.sqrt(p*p + q*q)
+            cosfi = round(p/s, 2)
+            self.client.publish("meter/cosfi3", cosfi)
+
+
+            
