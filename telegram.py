@@ -104,7 +104,7 @@ class aidon(object):
     def __init__(self, serial_port = "/dev/ttyUSB0",
                  debug = False, verbose = False):
 
-        def on_publish(client, userdata, mid):
+        def on_publish(client, userdata, mid, reason_code, properties):
             print("on_publish, mid={0:3}".format(mid))
 
         self.debug = debug
@@ -121,16 +121,15 @@ class aidon(object):
                                      dsrdtr=False,
                                      xonxoff=False)
 
-            try:
-                from secrets import secrets
-            except ImportError:
-                print("MQTT secrets are kept in secrets.py!")
+            username = secrets["usernamr"]
+            password = secrets["password"]
+            hostname = secrets["hostname"]
 
-            self.client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1)
-            self.client.username_pw_set(username = secrets["username"],
-                                        password = secrets["password"])
+            self.client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+            self.client.username_pw_set(username = username,
+                                        password = password)
             #self.client.on_publish = on_publish # callback
-            self.client.connect(secrets["hostname"])
+            self.client.connect(hostname)
             self.client.loop_start()
 
     ############################
