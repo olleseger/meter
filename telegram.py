@@ -3,6 +3,7 @@ import paho.mqtt.client as mqtt
 import libscrc
 import math
 import time
+from secrets import secrets
 
 ##############################################
 # test telegram
@@ -121,7 +122,7 @@ class aidon(object):
                                      dsrdtr=False,
                                      xonxoff=False)
 
-            username = secrets["usernamr"]
+            username = secrets["username"]
             password = secrets["password"]
             hostname = secrets["hostname"]
 
